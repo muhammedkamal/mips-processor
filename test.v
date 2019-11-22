@@ -1,3 +1,5 @@
+
+
 module mips(clock);
 
 	input clock;
@@ -63,7 +65,7 @@ module mips(clock);
 	end 
 	// muxs
 	//mux 2
-	 H_mux mux2(ALUSrc ,mux2In1 ,$signed(immediate), aluIn2 );
+	 H_mux mux2(ALUSrc ,mux2In1 , $signed(immediate), aluIn2 );
 	/*always @(ALUSrc)
 	begin
 		if (ALUSrc == 0)

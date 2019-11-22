@@ -1,3 +1,4 @@
+
 module K_memory(K_mem_read_data, K_mem_write_data, K_ALU_result, K_MemWrite);
 
 output reg [31:0] K_mem_read_data;

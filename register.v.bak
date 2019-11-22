@@ -4,10 +4,9 @@ input [31:0] K_write_data ;
 input K_Regwrite , clock ;
 output reg [31:0]  K_in1 , K_in2 ;
 reg [31:0] registers [ 0:31];
-initial
-begin
-$readmemb("regmem.txt", registers);
-end
+initial begin
+		$readmemb("regmem.txt", registers);
+	end
 
 always @ (posedge clock)
 begin
