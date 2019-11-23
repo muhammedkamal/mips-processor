@@ -7,7 +7,7 @@ initial
 begin 
 
 i=0;
-file = $fopen("C:/Users/Muhammad/Desktop/project/file.txt");
+file = $fopen("C:/Users/Muhammad/Desktop/project/regmem.txt");
 $fmonitor(file,"%b   // %d\n ",i,i);
 for (i=0; i<200 ;i=i+1)
 begin

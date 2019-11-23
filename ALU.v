@@ -15,15 +15,15 @@ end
 always @( K_in1  , K_in2 ,K_ALU_control)
 begin
     case(K_ALU_control)
-        3'b000 : K_ALU_result = K_in1 & K_in2;
+        4'b0000 : K_ALU_result = K_in1 & K_in2;
 
-        3'b001 : K_ALU_result = K_in1 | K_in2;
+        4'b0001 : K_ALU_result = K_in1 | K_in2;
 
-        3'b010 : K_ALU_result = K_in1 + K_in2;
+        4'b0010 : K_ALU_result = K_in1 + K_in2;
 
-        3'b110 : K_ALU_result = K_in1 - K_in2;
+        4'b0110 : K_ALU_result = K_in1 - K_in2;
 
-        3'b111 : K_ALU_result = (K_in1 < K_in2) ? 32'd1 : 32'd0;
+        4'b0111 : K_ALU_result = (K_in1 < K_in2) ? 32'd1 : 32'd0;
     endcase
     if (K_ALU_result == 0)
         K_zero = 1'b1;

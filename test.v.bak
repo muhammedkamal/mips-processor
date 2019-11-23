@@ -1,5 +1,3 @@
-
-
 module mips(clock);
 
 	input clock;
@@ -25,8 +23,9 @@ module mips(clock);
 	wire [3:0] ALU_control;
 	
 	// Registers contents
-	wire [31:0] regWrite_data, memory_read_data,aluIn1,aluIn2,mux2In1,mux2In2,aluResult;
-	
+	wire [31:0] regWrite_data, memory_read_data,aluIn1,aluIn2,mux2In1,aluResult,extended,mux1out;
+	// sign extender
+	SignExtender extend(  immediate, extended );
 	
 	// Read the instruction
 	pc inst_mem (instruction, PC);
@@ -42,9 +41,17 @@ module mips(clock);
 	//mem and reg
 	K_memory dataMemory(memory_read_data, mux2In1, aluResult, write_mem_signal);
 
-	K_register_file registers(rs , rt, rd , regWrite_data , write_reg_signal , aluIn1 , mux2In1 , clock);
+	K_register_file registers(rs , rt, mux1out , regWrite_data , write_reg_signal , aluIn1 , mux2In1 , clock);
 
+	// muxs
+	//mux 2
+	 H_mux mux2(ALUSrc ,mux2In1 , extended, aluIn2 );
+	
+	H_mux1 mux1(regDst_signal ,rt ,rd, mux1out );
+	
 
+	H_mux mux3(memToreg_signal ,mux2In1 ,memory_read_data, regWrite_data);
+	
 	// PC operations
 	always @(posedge clock) begin 
 		// jump 
@@ -62,35 +69,67 @@ module mips(clock);
 		else begin
 			PC = PC+1;
 		end
-	$fmonitor("%b   // %d\n ",PC,PC);
 	end 
-	// muxs
-	//mux 2
-	 H_mux mux2(ALUSrc ,mux2In1 , $signed(immediate), aluIn2 );
-	/*always @(ALUSrc)
-	begin
-		if (ALUSrc == 0)
-		aluIn2 = mux2In1;
-		else 
-		aluIn2 = $signed(immeddiate);
-	end*/
-	//mux 1
-	H_mux1 mux1(regDst_signal ,rt ,rd, rd );
-	/*always @(regDst_signal)
-	begin
-		if (regDst_signal ==0)
-		rd = rt;
-		else
-		rd =rd;
-	end*/
-	// mux 3
-	H_mux mux3(memToreg_signal ,mux2In1 ,memory_read_data, regWrite_data);
-	/*always @(memToreg_signal)
-	begin
-		if (memToreg_signal==0)
-		regWrite_data = mux2In1;
-		else 
-		regWrite_data = memory_read_data;
+	
+	
+initial
+$monitor("PC = %d \ninstruction = %b",PC ,instruction);
+endmodule
+  
+module mips_testbench ();
+
+	reg clock;
+	wire result;
+	
+	mips test(clock);
+
+	initial clock = 0;
+
+	initial begin 
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+		#50 clock=~clock; #50 clock=~clock;
+
+
+
 	end
-	*/
+
+
+endmodule
+module SignExtender(  extend, extended );
+input[15:0] extend;
+output[31:0] extended;
+
+reg[31:0] extended;
+wire[15:0] extend;
+
+always@(extend)
+begin
+    extended[15:0] = extend[15:0];
+    extended[31:15] = {16{extend[15]}};
+end
 endmodule

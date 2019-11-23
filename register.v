@@ -19,3 +19,29 @@ $writememb("regmem.txt",registers);
 end
 endmodule
 
+
+
+/* made by  muhammad  
+module regtest();
+reg [4:0] rs , rt, rd ;
+reg[31:0] K_write_data ;
+reg K_Regwrite , clock ;
+wire [31:0]  K_in1 , K_in2 ;
+K_register_file test_file(rs , rt, rd , K_write_data , K_Regwrite , K_in1 , K_in2  , clock);
+
+initial
+begin
+clock =1;
+rs <= 5;
+rt <= 3;
+rd <= 6;
+K_write_data <= 255;
+//K_in1 =2;
+//K_in2 =10;
+K_Regwrite <= 1;
+#50 clock=~clock; #50 clock=~clock;
+
+end
+
+endmodule
+*/
