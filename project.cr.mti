@@ -21,6 +21,20 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	K_register_file
 
+} {} {}} C:/Users/Muhammad/Desktop/project/memory.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/memory.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module K_memory
+
+Top level modules:
+	K_memory
+
+} {} {}} C:/Users/Muhammad/Desktop/project/control.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/control.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module P_control
+
+Top level modules:
+	P_control
+
 } {} {}} C:/Users/Muhammad/Desktop/project/insmem.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/insmem.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module pc
@@ -30,19 +44,19 @@ Top level modules:
 	pc
 	inst_bus
 
-} {} {}} C:/Users/Muhammad/Desktop/project/control.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/control.v
+} {} {}} C:/Users/Muhammad/Desktop/project/ALU.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/ALU.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module P_control
+-- Compiling module K_ALU
 
 Top level modules:
-	P_control
+	K_ALU
 
-} {} {}} C:/Users/Muhammad/Desktop/project/memory.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/memory.v
+} {} {}} C:/Users/Muhammad/Desktop/project/alu_control.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/alu_control.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module K_memory
+-- Compiling module P_ALU_control
 
 Top level modules:
-	K_memory
+	P_ALU_control
 
 } {} {}} C:/Users/Muhammad/Desktop/project/mux.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/mux.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -52,19 +66,5 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	H_mux
 	H_mux1
-
-} {} {}} C:/Users/Muhammad/Desktop/project/alu_control.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/alu_control.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module P_ALU_control
-
-Top level modules:
-	P_ALU_control
-
-} {} {}} C:/Users/Muhammad/Desktop/project/ALU.v {1 {vlog -work work -stats=none C:/Users/Muhammad/Desktop/project/ALU.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module K_ALU
-
-Top level modules:
-	K_ALU
 
 } {} {}}

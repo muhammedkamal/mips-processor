@@ -10,7 +10,7 @@ module mips(clock);
 	
 	// bus instruction
 	wire [5:0] funct;
-	wire [4:0] rs, rt, rd, shamt;
+	wire [4:0] rs, rt, rd, shamt,mux1out;
 	wire [25:0] address;
 	wire [15:0] immediate;
 	wire [5:0] opcode;
@@ -23,7 +23,7 @@ module mips(clock);
 	wire [3:0] ALU_control;
 	
 	// Registers contents
-	wire [31:0] regWrite_data, memory_read_data,aluIn1,aluIn2,mux2In1,aluResult,extended,mux1out;
+	wire [31:0] regWrite_data, memory_read_data,aluIn1,aluIn2,mux2In1,aluResult,extended;
 	// sign extender
 	SignExtender extend(  immediate, extended );
 	
@@ -50,7 +50,7 @@ module mips(clock);
 	H_mux1 mux1(regDst_signal ,rt ,rd, mux1out );
 	
 
-	H_mux mux3(memToreg_signal ,mux2In1 ,memory_read_data, regWrite_data);
+	H_mux mux3(memToreg_signal ,aluResult ,memory_read_data, regWrite_data);
 	
 	// PC operations
 	always @(posedge clock) begin 

@@ -50,7 +50,7 @@ module mips(clock);
 	H_mux1 mux1(regDst_signal ,rt ,rd, mux1out );
 	
 
-	H_mux mux3(memToreg_signal ,mux2In1 ,memory_read_data, regWrite_data);
+	H_mux mux3(memToreg_signal ,aluResult ,memory_read_data, regWrite_data);
 	
 	// PC operations
 	always @(posedge clock) begin 
@@ -63,7 +63,7 @@ module mips(clock);
 			PC = aluIn1;
 		end
 		// branch
-		else if(regWrite_data == 0 & branch_signal == 1) begin
+		else if(branch_signal == 1) begin
 			PC = PC + 1 + $signed(immediate); 
 		end
 		else begin
