@@ -33,7 +33,7 @@ module mips(clock);
 	inst_bus bus (opcode, rs, rt, rd, shamt, funct, immediate, address, instruction, PC);
 							 
 	//control unit
-	P_control control(regDst_signal, branch_signal, memToreg_signal, ALUOp, read_mem_signal, ALUSrc,write_reg_signal , instruction);
+	P_control control(regDst_signal, branch_signal, memToreg_signal, ALUOp, write_mem_signal, ALUSrc,write_reg_signal , instruction,read_mem_signal);
 	//alu
 	K_ALU alu(aluResult, zero, aluIn1, aluIn2, ALU_control);
 		

@@ -10,18 +10,33 @@ wire K_MemRead = ~K_MemWrite;
 reg [31:0] K_data_registers [0:255];
 
 
-initial begin
-$readmemb("memory.txt",K_data_registers);
+//from here added by muhammad
+reg [255:0] i;
+integer file;
+
+initial 
+begin 
+
+i=0;
+file = $fopen("C:/Users/Muhammad/Desktop/project/memory.txt");
+$fmonitor(file,"%b ",i);
+for (i=0; i<255 ;i=i+1)
+begin
+K_data_registers[i]=0;
+end
 end
 
 
 always @(K_ALU_result, K_mem_write_data)
 begin
     if(K_MemWrite )
+	begin
         K_data_registers[K_ALU_result] = K_mem_write_data;
+	$writememb("memory.txt",K_data_registers); //added by muhammad
+	end
     if(K_MemRead )
         K_mem_read_data = K_data_registers[K_ALU_result];
-$writememb("memory.txt",K_data_registers);
+
 end
 
 endmodule

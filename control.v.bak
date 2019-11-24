@@ -2,7 +2,7 @@
 
 module P_control(P_RegDst, P_Branch, P_MemtoReg, P_ALUOp, P_MemWrite, P_ALUSrc, P_RegWrite, P_instruction ,mem_read);  
 
-output P_RegDst, P_Branch, P_MemtoReg, P_MemWrite, P_ALUSrc, P_RegWrite ,mem_read;
+output P_RegDst, P_Branch, P_MemtoReg, P_MemWrite, P_ALUSrc, P_RegWrite ,mem_write;
 output [1:0] P_ALUOp;
 input [31:0] P_instruction;
 
