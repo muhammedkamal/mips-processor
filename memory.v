@@ -25,17 +25,17 @@ begin
 K_data_registers[i]=0;
 end
 end
-
+//to here
 
 always @(K_ALU_result, K_mem_write_data)
 begin
     if(K_MemWrite )
 	begin
-        K_data_registers[K_ALU_result] = K_mem_write_data;
+        K_data_registers[K_ALU_result/4] = K_mem_write_data;//edit by muhammad
 	$writememb("memory.txt",K_data_registers); //added by muhammad
 	end
     if(K_MemRead )
-        K_mem_read_data = K_data_registers[K_ALU_result];
+        K_mem_read_data = K_data_registers[K_ALU_result/4];//edit by muhammad
 
 end
 

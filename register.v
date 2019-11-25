@@ -1,8 +1,9 @@
-module K_register_file (rs , rt, rd , K_write_data , K_Regwrite , K_in1 , K_in2  , clock);
+module K_register_file (rs , rt, rd , K_write_data , K_Regwrite , K_in1 , K_in2  , clock ,ra_content);
 input [4:0] rs , rt, rd ;
 input [31:0] K_write_data ;
 input K_Regwrite , clock ;
 output reg [31:0]  K_in1 , K_in2 ;
+input wire [31:0] ra_content;
 reg [31:0] registers [ 0:31];
 //from here added by muhammad
 reg [31:0] i;
@@ -29,6 +30,7 @@ K_in2 <= registers [rt];
 if ( K_Regwrite)
 registers[rd] =  K_write_data ; //edited by muhammad
 $writememb("regmem.txt",registers); //added by muhammad
+registers[31]=ra_content; // ra added by muhammad for jal
 end
 endmodule
 

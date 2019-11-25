@@ -7,7 +7,8 @@ module mips(clock);
 	
 	// Intruction
 	wire [31:0] instruction;
-	
+	//ra 
+	reg [31:0] ra_content;
 	// bus instruction
 	wire [5:0] funct;
 	wire [4:0] rs, rt, rd, shamt,mux1out;
@@ -35,13 +36,13 @@ module mips(clock);
 	//control unit
 	P_control control(regDst_signal, branch_signal, memToreg_signal, ALUOp, write_mem_signal, ALUSrc,write_reg_signal , instruction,read_mem_signal);
 	//alu
-	K_ALU alu(aluResult, zero, aluIn1, aluIn2, ALU_control);
+	K_ALU alu(aluResult, zero, aluIn1, aluIn2, ALU_control,shamt);
 		
 	P_ALU_control aluControl(ALU_control, ALUOp, funct);
 	//mem and reg
 	K_memory dataMemory(memory_read_data, mux2In1, aluResult, write_mem_signal);
 
-	K_register_file registers(rs , rt, mux1out , regWrite_data , write_reg_signal , aluIn1 , mux2In1 , clock);
+	K_register_file registers(rs , rt, mux1out , regWrite_data , write_reg_signal , aluIn1 , mux2In1 , clock,ra_content);
 
 	// muxs
 	//mux 2
@@ -55,16 +56,21 @@ module mips(clock);
 	// PC operations
 	always @(posedge clock) begin 
 		// jump 
-		if(opcode == 6'h2) begin
+		if(opcode == 6'd2) begin
 			PC = address;
 		end
 		// jr
-		else if(opcode == 6'h0 & funct == 6'h08)begin
+		else if(opcode == 6'd0 & funct == 6'd8)begin
 			PC = aluIn1;
 		end
 		// branch
 		else if(branch_signal == 1) begin
 			PC = PC + 1 + $signed(immediate); 
+		end
+		//jal
+		else if(opcode == 6'd3) begin
+			ra_content = PC ;
+			PC = address;
 		end
 		else begin
 			PC = PC+1;

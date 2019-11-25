@@ -8,12 +8,15 @@ input [5:0] P_funct;
 initial
     P_ALU_control = 4'b0000;
 
-always @(P_ALUOp)
+always @(P_ALUOp , P_funct)
 begin
     case(P_ALUOp[1])
         1'b0 :  case(P_ALUOp[0])
-                1'b0 : P_ALU_control = 4'b0010; // ADD for LW, SW
-
+                1'b0 : case(P_funct[5:0]) //edited by muhammad to add sll
+			
+			6'd0:P_ALU_control = 4'b1000; //sll
+			default:P_ALU_control = 4'b0010; // ADD for LW, SW
+			endcase
                 1'b1 : P_ALU_control = 4'b0110; // SUB for BEQ
             endcase
 
@@ -33,6 +36,7 @@ begin
           1'b1 : P_ALU_control = 4'b0001; // ORi
 
     endcase
+	
 end
 
 endmodule
